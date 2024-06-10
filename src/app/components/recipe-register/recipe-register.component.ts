@@ -80,6 +80,8 @@ export class RecipeRegisterComponent implements OnInit {
   }
 
   async onsubmit() {
+    const id = localStorage.getItem('id');
+
     const cate = this.categories.find(
       (c) => c.name === this.recipe.get('category')?.value
     );
@@ -88,12 +90,13 @@ export class RecipeRegisterComponent implements OnInit {
     const diff = this.difficulties.find(
       (d) => d.name === this.recipe.get('difficulty')?.value
     );
+    console.log(id);
 
     this.difficultyId = diff.id;
 
     const recipeObject = {
       account: {
-        id: localStorage.getItem('id'),
+        id: Number(id),
       },
       name: this.recipe.get('name')?.value,
       description: this.recipe.get('description')?.value,

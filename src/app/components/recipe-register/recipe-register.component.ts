@@ -66,8 +66,8 @@ export class RecipeRegisterComponent implements OnInit {
       ingredients: new FormControl('', [Validators.required]),
       preparation: new FormControl('', [Validators.required]),
       time_min: new FormControl('', [Validators.required]),
-      category: new FormControl(''),
-      difficulty: new FormControl(''),
+      category: new FormControl('', [Validators.required]),
+      difficulty: new FormControl('', [Validators.required]),
     });
 
     this.route.params.subscribe((params: any) => {
@@ -90,7 +90,6 @@ export class RecipeRegisterComponent implements OnInit {
     const diff = this.difficulties.find(
       (d) => d.name === this.recipe.get('difficulty')?.value
     );
-    console.log(id);
 
     this.difficultyId = diff.id;
 

@@ -1,0 +1,105 @@
+<nav
+  class="bg-negro-sazon px-3 py-5 md:flex md:justify-between md:bg-negro-sazon md:py-8 fixed w-full top-0 z-50"
+>
+  <section class="flex justify-between md:mb-0 md:pl-10">
+    <img
+      src="../../../assets/resources/logo_oficial.svg"
+      alt=""
+      class="w-28 md:w-36 cursor-pointer"
+    />
+
+    <button class="md:hidden acordeon" (click)="menuControl()">
+      <svg
+        xmlns="http://www.w3.org/2000/svg"
+        fill="none"
+        viewBox="0 0 24 24"
+        stroke-width="1.5"
+        stroke="white"
+        class="w-6 h-6 text-amarillo-sazon-900"
+      >
+        <path
+          stroke-linecap="round"
+          stroke-linejoin="round"
+          d="M3.75 6.75h16.5M3.75 12h16.5m-16.5 5.25h16.5"
+        />
+      </svg>
+    </button>
+  </section>
+
+  <div [ngClass]="claseActual" class="md:block ocultar">
+    @if (registered) {
+    <section
+      class="flex flex-col w-full gap-1 capitalize md:flex-row md:items-center md:justify-center text-amarillo-sazon md:w-auto mt-4"
+    >
+      <a
+        routerLink="/recipes"
+        routerLinkActive="active"
+        [routerLinkActiveOptions]="{ exact: true }"
+        class="p-2 md:bg-transparent md:hover:opacity-90"
+      >
+        recetas
+      </a>
+
+      <a
+        routerLink="/myrecipes"
+        routerLinkActive="active"
+        class="p-2 md:bg-transparent md:hover:opacity-90"
+      >
+        Mis Recetas
+      </a>
+      <a
+        routerLink="/favorites"
+        routerLinkActive="active"
+        class="p-2 md:bg-transparent md:hover:opacity-90"
+      >
+        Mis Favoritas
+      </a>
+      <a
+        routerLink="/newRecipe"
+        routerLinkActive="active"
+        class="p-2 md:bg-transparent md:hover:opacity-90"
+      >
+        Nueva receta
+      </a>
+
+      @if (registered) {
+      <a
+        class="p-2 md:bg-transparent md:hover:opacity-90 border-t cursor-pointer md:hidden"
+        (click)="logout()"
+      >
+        Cerrar sesión
+      </a>
+
+      }
+    </section>
+
+    }
+  </div>
+
+  @if (!registered) {
+  <div [ngClass]="claseActual" class="md:block ocultar mr-10">
+    <section
+      class="flex flex-col gap-1 mt-4 text-center capitalize text-negro-sazon md:flex-row md:gap-3 md:mt-0"
+    >
+      <a
+        routerLink="/auth/login"
+        class="bg-amarillo-sazon p-2 hover:opacity-90 rounded"
+      >
+        iniciar sesión
+      </a>
+      <a
+        routerLink="/auth/register"
+        class="bg-amarillo-sazon p-2 hover:opacity-90 rounded"
+      >
+        registrarse
+      </a>
+    </section>
+  </div>
+  } @else {
+
+  <div class="flex gap-2 items-center md:pr-8">
+    <span class="text-white capitalize hidden md:block">{{ name }}</span>
+    <app-profile *ngIf="registered" class="hidden md:block"></app-profile>
+  </div>
+  }
+</nav>

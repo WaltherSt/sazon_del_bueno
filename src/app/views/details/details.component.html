@@ -1,0 +1,124 @@
+<div class="flex flex-col gap-5 mb-10">
+  <div
+    class="mt-[130px] flex flex-col md:flex-row justify-center container mx-auto gap-5 overflow-hidden h-full"
+  >
+    <div class="flex flex-col w-full md:w-[300px] md:max-h-[350px]">
+      <div class="p-5 rounded-md shadow-md bg-amarillo-sazon">
+        <img [src]="data.image" alt="" class="rounded mb-5 mx-auto max-h-52" />
+
+        <div class="flex flex-col gap-3">
+          <div class="flex flex-col">
+            <div class="flex gap-2 text-sm">
+              <ng-icon name="bootstrapAlarmFill" size="20px"></ng-icon
+              ><span>Tiempo de cocción - {{ data.time_min }} min</span>
+            </div>
+          </div>
+
+          <div class="flex flex-col">
+            <div class="flex gap-2 text-sm">
+              <ng-icon name="bootstrapBarChartFill" size="20px"></ng-icon
+              ><span>Dificultad - {{ data.difficulty | titlecase }}</span>
+            </div>
+          </div>
+
+          <div class="flex flex-col">
+            <div class="flex gap-2 text-sm">
+              <ng-icon name="bootstrapTagFill" size="20px"></ng-icon
+              ><span>Categoria - {{ data.category | titlecase }}</span>
+            </div>
+          </div>
+
+          <div class="flex flex-col">
+            <div class="flex gap-2 text-sm items-center">
+              <ng-icon name="bootstrapStarFill" size="20" />
+              <span>Calificación - {{ avgByRecipe | number : "1.1-1" }}</span>
+            </div>
+          </div>
+          <div class="flex flex-col">
+            <div class="flex gap-2 text-sm items-center">
+              <ng-icon name="bootstrapPersonFillUp" size="20" />
+              <span>Autor - {{ data.user | titlecase }}</span>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      @if(isRatingLoaded){
+      <app-rating
+        [activeStars]="ratingAccount"
+        (sendRating)="receiveRating($event)"
+      />
+      }
+    </div>
+
+    <div class="md:w-[500px] flex flex-col gap-5 h-full">
+      <div class="px-10">
+        <h2 class="mb-2 font-bold">Ingredientes</h2>
+        <p>{{ data.ingredients }}</p>
+      </div>
+
+      <div class="overflow-y-auto px-10 h-[500px]">
+        <h2 class="mb-2 font-bold">Preparación</h2>
+        <p>{{ data.preparation }}</p>
+        <p>
+          Lorem ipsum, dolor sit amet consectetur adipisicing elit. Ratione
+          blanditiis ad rerum natus, atque id eligendi vero porro impedit
+          aperiam dolor adipisci numquam consectetur nam reiciendis veniam
+          laboriosam. Non, beatae? Lorem ipsum dolor sit amet consectetur
+          adipisicing elit. Assumenda fugiat officiis rem ipsa similique
+          architecto nesciunt iusto earum accusantium rerum? Aperiam fugiat
+          recusandae quidem provident repellat numquam quo minus quaerat.
+        </p>
+        <p>
+          Lorem ipsum, dolor sit amet consectetur adipisicing elit. Ratione
+          blanditiis ad rerum natus, atque id eligendi vero porro impedit
+          aperiam dolor adipisci numquam consectetur nam reiciendis veniam
+          laboriosam. Non, beatae? Lorem ipsum dolor sit amet consectetur
+          adipisicing elit. Assumenda fugiat officiis rem ipsa similique
+          architecto nesciunt iusto earum accusantium rerum? Aperiam fugiat
+          recusandae quidem provident repellat numquam quo minus quaerat.
+        </p>
+        <p>
+          Lorem ipsum, dolor sit amet consectetur adipisicing elit. Ratione
+          blanditiis ad rerum natus, atque id eligendi vero porro impedit
+          aperiam dolor adipisci numquam consectetur nam reiciendis veniam
+          laboriosam. Non, beatae? Lorem ipsum dolor sit amet consectetur
+          adipisicing elit. Assumenda fugiat officiis rem ipsa similique
+          architecto nesciunt iusto earum accusantium rerum? Aperiam fugiat
+          recusandae quidem provident repellat numquam quo minus quaerat.
+        </p>
+      </div>
+    </div>
+  </div>
+  <div class="w-full md:w-1/2 mx-auto shadow p-5">
+    <div class="flex gap-3 items-center">
+      <ng-icon name="bootstrapChatSquareText" size="20"></ng-icon>
+      <h2 class="text-lg">Comentarios</h2>
+    </div>
+
+    <div class="mt-5 flex items-center gap-1">
+      <input
+        type="text"
+        class="w-full rounded-lg border-none bg-gray-100 placeholder-opacity-50 placeholder-gray-400"
+        placeholder="Añade un comentario"
+        name="comment"
+        [(ngModel)]="comment"
+      />
+
+      <button
+        (click)="registerComment()"
+        class="flex items-center cursor-pointer hover:opacity-80"
+      >
+        <ng-icon name="bootstrapSend" size="20" class="rotate-45"></ng-icon>
+      </button>
+    </div>
+
+    <div class="mt-10 rounded-md flex flex-col gap-5">
+      @for (item of comments; track $index) {
+
+      <app-comment [comment]="item"></app-comment>
+
+      }
+    </div>
+  </div>
+</div>

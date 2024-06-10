@@ -1,0 +1,70 @@
+<form
+  class="mt-2 flex flex-col gap-2 relative"
+  (ngSubmit)="onSubmit()"
+  [formGroup]="accountLogin"
+>
+  @if (loginError) {
+  <div class="text-7xl absolute">Error</div>
+  } @if (error) {
+
+  <div
+    class="p-4 mb-4 text-sm text-red-800 rounded-lg bg-red-50 dark:bg-gray-800 dark:text-red-400"
+    role="alert"
+  >
+    <span class="font-medium">{{ msg }}</span>
+  </div>
+  }
+  <div class="flex flex-col">
+    <label for="email">Email</label>
+    <input
+      name="email"
+      id="email"
+      type="email"
+      class="border border-gray-100 bg-gray-50 focus:outline-0 rounded p-2 text-gray-600"
+      formControlName="email"
+      autocomplete="email"
+    />
+  </div>
+  <div
+    *ngIf="
+      accountLogin.get('email')?.invalid && accountLogin.get('email')?.touched
+    "
+    class="text-red-500 text-[11px]"
+  >
+    El correo no tiene el formato correcto
+  </div>
+  <div class="flex flex-col">
+    <label for="password">Contraseña</label>
+    <input
+      name="password"
+      id="password"
+      type="password"
+      class="border border-gray-100 bg-gray-50 focus:outline-0 rounded p-2 text-gray-600"
+      formControlName="password"
+      autocomplete="current-password"
+    />
+  </div>
+  <div
+    *ngIf="
+      accountLogin.get('password')?.invalid &&
+      accountLogin.get('password')?.touched
+    "
+    class="text-red-500 text-[11px]"
+  >
+    La contraseña no es válida
+  </div>
+  <button
+    class="mt-2 p-2 bg-negro-sazon w-full hover:opacity-80 rounded text-sm text-amarillo-sazon"
+    [disabled]="!accountLogin.valid"
+  >
+    Iniciar Sesión
+  </button>
+  <div class="flex justify-between p-1">
+    <a
+      (click)="changePath()"
+      class="hover:text-gray-600 text-[12px] cursor-pointer"
+      >Crear cuenta</a
+    >
+    <a href="" class="hover:text-gray-600 text-[12px]">Olvidé mi Contraseña</a>
+  </div>
+</form>

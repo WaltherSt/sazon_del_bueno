@@ -1,0 +1,100 @@
+<form
+  [formGroup]="accountForm"
+  class="flex flex-col gap-2"
+  (ngSubmit)="onSubmit()"
+>
+  <div class="flex flex-col">
+    <label for="name" class="text-negro-sazon">Nombre</label>
+    <input
+      class="bg-gray-50 rounded p-2 text-gray-600 border-none"
+      type="text"
+      id="name"
+      formControlName="name"
+    />
+    <div
+      *ngIf="
+        accountForm.get('name')?.invalid && accountForm.get('name')?.touched
+      "
+      class="text-red-500 text-[11px]"
+    >
+      El nombre es obligatorio y debe contener solo letras y espacios.
+    </div>
+  </div>
+
+  <div class="flex flex-col">
+    <label for="username" class="text-negro-sazon">Correo electrónico</label>
+    <input
+      class="bg-gray-50 rounded p-2 text-gray-600 border-none"
+      type="email"
+      id="username"
+      formControlName="username"
+    />
+    <div
+      *ngIf="
+        accountForm.get('username')?.invalid &&
+        accountForm.get('username')?.touched
+      "
+      class="text-red-500 text-[11px]"
+    >
+      El correo no tiene el formato correcto
+    </div>
+  </div>
+  <div class="flex flex-col">
+    <label for="date" class="text-negro-sazon">Fecha de nacimiento</label>
+    <input
+      class="rounded p-2 text-gray-600 w-full border-none bg-gray-50"
+      type="date"
+      id="date"
+      formControlName="date_of_birth"
+    />
+  </div>
+  <div class="flex flex-col">
+    <label for="password" class="text-negro-sazon">Contraseña</label>
+    <div class="flex rounded items-center justify-between relative h-10">
+      <input
+        class="text-gray-600 h-full w-full pl-2 border-none bg-gray-50"
+        [type]="viewPassword ? 'text' : 'password'"
+        name="password"
+        id="password"
+        formControlName="password"
+      />
+
+      @if(viewPassword){
+
+      <ng-icon
+        (click)="changeViewPassword()"
+        name="heroEye"
+        size="18px"
+        class="absolute right-2 cursor-pointer"
+      ></ng-icon>
+
+      } @else {
+      <ng-icon
+        name="heroEyeSlash"
+        size="18px"
+        class="absolute right-2 cursor-pointer"
+        (click)="changeViewPassword()"
+      ></ng-icon>
+
+      }
+    </div>
+    <div
+      *ngIf="
+        accountForm.get('password')?.invalid &&
+        accountForm.get('password')?.touched
+      "
+      class="text-red-500 text-[11px]"
+    >
+      la contraseña debe contener al menos una letra minúscula, una letra
+      mayúscula, un dígito, una longitud mínima de 8 caracteres y sin espacios.
+    </div>
+  </div>
+
+  <button
+    type="submit"
+    [disabled]="!accountForm.valid"
+    class="p-2 bg-negro-sazon text-amarillo-sazon w-full mt-2 hover:opacity-80 rounded text-sm"
+  >
+    Crear
+  </button>
+</form>

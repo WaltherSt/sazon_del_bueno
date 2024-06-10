@@ -1,0 +1,62 @@
+<div
+  class="w-72 h-full bg-white shadow-lg rounded-md cursor-pointer transition-all hover:shadow-2xl"
+>
+  <img
+    [src]="data.image ?? '../../../assets/img/notfound.jpg'"
+    class="w-full rounded-t-md h-44"
+    alt="image"
+  />
+
+  <div class="mx-5 mt-5">
+    <div class="flex justify-between">
+      <h2 class="font-medium text-gris-sazon">{{ data.name }}</h2>
+
+      @if (registered) {
+      <button (click)="sendId()">
+        <ng-icon
+          name="faSolidStar"
+          size="20"
+          class="transition-all"
+          [ngClass]="classStarFavorit"
+        ></ng-icon>
+      </button>
+      }
+    </div>
+
+    <div class="flex justify-between items-center mb-1 mt-1">
+      <div class="flex gap-1 text-gray-400">
+        <ng-icon name="heroClock"></ng-icon>
+        <span class="text-[11px]">{{ data.createdAt | date }}</span>
+      </div>
+
+      <div class="flex gap-1 text-gray-400 cursor-pointer hover:opacity-80">
+        <ng-icon name="heroChatBubbleBottomCenter"></ng-icon>
+
+        <span class="text-[11px]">5 comentarios</span>
+      </div>
+    </div>
+
+    <div class="h-28 overflow-hidden py-2">
+      <p class="overflow-hidden text-[12px] text-gris-sazon">
+        {{ data.description }}
+      </p>
+    </div>
+
+    @if (registered) {
+    <button
+      (click)="redirectToDetail()"
+      class="bg-gray-100 p-3 my-4 text-negro-sazon w-full hover:bg-amarillo-sazon hover:font-medium transition-colors text-xs uppercase rounded"
+    >
+      continuar leyendo
+    </button>
+    }@else {
+    <button
+      (click)="redirectToRegister()"
+      class="bg-gray-100 p-3 my-4 text-negro-sazon w-full hover:bg-amarillo-sazon hover:font-medium transition-colors text-xs uppercase rounded"
+    >
+      Registrate para ver la receta
+    </button>
+
+    }
+  </div>
+</div>

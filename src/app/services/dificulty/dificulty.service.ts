@@ -14,8 +14,9 @@ export interface Difficulty {
 })
 export class DificultyService {
   private apiUrl: string = environment.API_URL;
+  private headersApi = new HttpHeaders();
 
-  constructor(private http: HttpClient, private headersApi: HttpHeaders) {}
+  constructor(private http: HttpClient) {}
 
   setHeaders() {
     this.headersApi = new HttpHeaders({

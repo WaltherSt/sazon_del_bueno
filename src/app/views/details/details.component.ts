@@ -87,9 +87,11 @@ export class DetailsComponent implements OnInit {
   }
 
   avgData() {
-    this.ratingService.getAvgByRecipe(Number(this.id)).subscribe((data) => {
-      this.avgByRecipe = data;
-    });
+    this.ratingService
+      .getByAccountAndRecipe(Number(localStorage.getItem('id')), this.id)
+      .subscribe((data: any) => {
+        this.avgByRecipe = data.rating;
+      });
   }
 
   getRatingByaccountAndRecipe(): void {
